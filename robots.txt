@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yanbhar.github.io/panel-9y-com/sitemap.xml

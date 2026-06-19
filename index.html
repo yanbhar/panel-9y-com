@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九游 · 探索与交汇的视野</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f7fbfc;
+            color: #1f2a2e;
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            flex: 1;
+        }
+
+        /* Hero 区域 — 杂志风格横幅 */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, #d2eee6 0%, #b2d9cf 100%);
+            border-radius: 2.5rem 2.5rem 1.5rem 1.5rem;
+            padding: 3.5rem 2.5rem;
+            margin-bottom: 3.5rem;
+            box-shadow: 0 12px 28px rgba(30, 70, 60, 0.08);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .hero-text {
+            flex: 1 1 320px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 450;
+            letter-spacing: -0.01em;
+            color: #0e3d38;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 span {
+            background: #1e6b5e;
+            color: #f0faf7;
+            display: inline-block;
+            padding: 0 0.4rem 0.1rem;
+            border-radius: 8px;
+            font-weight: 480;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: #22544b;
+            max-width: 480px;
+            margin-top: 0.6rem;
+            border-left: 3px solid #3d8b7a;
+            padding-left: 1rem;
+            font-weight: 380;
+        }
+
+        .hero-graphic {
+            flex: 0 0 180px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, #5ca392, #2f7667);
+            border-radius: 60% 40% 50% 50% / 50% 40% 60% 50%;
+            opacity: 0.55;
+            transform: rotate(6deg);
+            position: relative;
+            margin: 1rem 0 0 1.5rem;
+        }
+
+        /* 网格卡片区域 — 三个段落 + 隐藏的第四格 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+            margin: 2.8rem 0 2.2rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 1.8rem;
+            padding: 1.8rem 1.6rem 2rem;
+            box-shadow: 0 6px 18px rgba(0, 20, 15, 0.04);
+            transition: 0.2s ease box-shadow, 0.2s ease transform;
+            border: 1px solid #dcf0ea;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            box-shadow: 0 12px 28px rgba(43, 102, 88, 0.08);
+            transform: translateY(-3px);
+            border-color: #a9d4c6;
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            line-height: 1;
+            margin-bottom: 0.75rem;
+            color: #2a7b6a;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            font-weight: 440;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.6rem;
+            color: #173d36;
+        }
+
+        .card p, .card li {
+            font-size: 0.98rem;
+            color: #2c4240;
+            margin-bottom: 0.65rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0.2rem;
+        }
+
+        .card ul li::before {
+            content: "·";
+            color: #388b78;
+            font-weight: 600;
+            display: inline-block;
+            width: 1rem;
+        }
+
+        .card .standout {
+            font-weight: 430;
+            color: #135b4d;
+            background: #e4f5ef;
+            display: inline-block;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        /* 背景说明 + 叙述段落 (杂志式的拉宽区块) */
+        .context-block {
+            background: #e8f4f0;
+            border-radius: 2rem;
+            padding: 2.2rem 2.5rem;
+            margin: 2.8rem 0 2.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .context-block .context-main {
+            flex: 2 1 280px;
+        }
+
+        .context-block .context-highlight {
+            flex: 1 1 180px;
+            background: #c4e3d9;
+            border-radius: 1.5rem;
+            padding: 1.4rem 1.4rem;
+            color: #163b34;
+            font-size: 0.95rem;
+        }
+
+        .context-block h2 {
+            font-size: 1.6rem;
+            font-weight: 420;
+            color: #175246;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #adcfc3;
+            display: inline-block;
+            padding-bottom: 0.2rem;
+        }
+
+        .context-block p {
+            margin-bottom: 1rem;
+            color: #1d423b;
+        }
+
+        .context-highlight p {
+            margin: 0.4rem 0;
+            line-height: 1.6;
+        }
+
+        .context-highlight .tag {
+            background: #327a68;
+            color: #f1fcf6;
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 0.4rem;
+        }
+
+        /* FAQ 摘要 (杂志常见话题) */
+        .faq-digest {
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 2rem 2rem 1.8rem;
+            margin: 2.2rem 0 2.5rem;
+            border: 1px solid #cde3db;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem 2.5rem;
+        }
+
+        .faq-digest .faq-item {
+            flex: 1 1 200px;
+        }
+
+        .faq-digest .faq-q {
+            font-weight: 500;
+            color: #0b4c41;
+            margin-bottom: 0.3rem;
+            border-left: 3px solid #419582;
+            padding-left: 0.8rem;
+        }
+
+        .faq-digest .faq-a {
+            color: #34534b;
+            font-size: 0.95rem;
+            padding-left: 1.1rem;
+        }
+
+        /* 页尾访问提示 — 融入句子 */
+        .footer-note {
+            margin-top: 2rem;
+            padding: 1.8rem 2rem;
+            background: #dbeae4;
+            border-radius: 3rem 3rem 1.5rem 1.5rem;
+            text-align: center;
+            font-size: 1.05rem;
+            color: #1e4840;
+            border: 1px solid #b8d6cb;
+        }
+
+        .footer-note a {
+            color: #0a4f40;
+            text-decoration: none;
+            font-weight: 470;
+            border-bottom: 2px solid #479281;
+            padding-bottom: 1px;
+            transition: 0.15s border-color, 0.15s color;
+        }
+
+        .footer-note a:hover {
+            border-bottom-color: #0e755c;
+            color: #04382e;
+        }
+
+        .footer-note .light {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .fine-print {
+            text-align: center;
+            color: #68837a;
+            font-size: 0.8rem;
+            margin-top: 2.2rem;
+            border-top: 1px solid #c7dbd3;
+            padding-top: 1.5rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 700px) {
+            .wrapper {
+                padding: 1.2rem 1rem;
+            }
+            .hero {
+                padding: 2.2rem 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                border-radius: 2rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero-graphic {
+                align-self: flex-end;
+                margin: 0.5rem 0 0 0;
+                width: 100px;
+                height: 80px;
+                flex-basis: 80px;
+            }
+            .grid-cards {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .context-block {
+                padding: 1.8rem 1.5rem;
+                flex-direction: column;
+            }
+            .faq-digest {
+                padding: 1.5rem 1.2rem;
+            }
+            .footer-note {
+                padding: 1.2rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .card {
+                padding: 1.4rem;
+            }
+            .context-block h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- hero 杂志横幅 -->
+    <div class="hero">
+        <div class="hero-text">
+            <h1>交汇的<span>视野</span></h1>
+            <p>从一片水域开始，去理解连接的可能。九游并非一个终点，而是诸多线索的汇合处。</p>
+        </div>
+        <div class="hero-graphic"></div>
+    </div>
+
+    <!-- 网格卡片：三段自然介绍 + 一个特点摘要 -->
+    <div class="grid-cards">
+        <div class="card">
+            <div class="card-icon">⊹</div>
+            <h3>折光</h3>
+            <p>从最细微的涟漪，到宽阔的水面，信息如同光线穿过不同密度，折射出多样解读。我们不追逐浪头，而观察水纹的走向。</p>
+            <span class="standout">慢信号 · 多棱镜</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">◈</div>
+            <h3>暗流与航道</h3>
+            <p>水面之下的节奏往往更持久。在频繁变动中，存在一些相对稳定的路径——它们源于持续的梳理与沉淀。九游所关注的，正是这些不易察觉的脉络。</p>
+            <span class="standout">底流 · 耐性</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">⌘</div>
+            <h3>边界上的节点</h3>
+            <p>每一次连接都重新划定边界。平台、工具、社群，它们既分隔又互通。这里不提供标准答案，但愿意成为那个安静的路口。</p>
+            <span class="standout">节点 · 交集</span>
+        </div>
+        <!-- 第四张卡片作为特点/场景补充，保持网格一致 -->
+        <div class="card">
+            <div class="card-icon">⧩</div>
+            <h3>日常的间隙</h3>
+            <p>在浏览、阅读、协作之间，偶尔出现一些空隙。这些空隙里藏着未被标注的视角。九游更像是一个容器，接收那些未被归类的碎片。</p>
+            <span class="standout">容器 · 未完成</span>
+        </div>
+    </div>
+
+    <!-- 背景说明 + 叙述 杂志式双栏 -->
+    <div class="context-block">
+        <div class="context-main">
+            <h2>背后，不止水面</h2>
+            <p>「九游」这个词，最初源于对九种不同水流姿态的记录。后来渐渐延伸为一种观看方式：承认变化，也尊重惯性。我们试着不去过度解释，而是留出空间让每个到访者自己发现对应。</p>
+            <p>网站本身并不堆叠功能，也不承诺效率，它只是作为一个相对安静的界面存在。如果你需要查找某些线索，或者只是短暂停留，这里的节奏或许恰好合适。</p>
+            <p>内容围绕几个松散的主题生长，不追求爆款，也不刻意制造紧迫。在这里，信息有自己的呼吸频率。</p>
+        </div>
+        <div class="context-highlight">
+            <span class="tag">背景·叙述</span>
+            <p>从2019年一个共享文档开始，慢慢变成现在的形式。没有团队，没有路线图，只是持续地做减法。</p>
+            <p style="margin-top: 0.8rem;">—— 与其说是一个网站，不如说是一个实验：在信息过载的时代，保留一种克制的连接。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要风格，不加标题仅列出常见话题 -->
+    <div class="faq-digest">
+        <div class="faq-item">
+            <div class="faq-q">这个网站适合谁？</div>
+            <div class="faq-a">对节奏不敏感的人，或者寻找非快餐信息的人。没有特定画像，只要你觉得这里的语气可以接受。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">内容多久更新？</div>
+            <div class="faq-a">不定期。有时候一周两次，有时候一月一次。没有推送，没有提醒。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">有社区或讨论区吗？</div>
+            <div class="faq-a">没有内置讨论区。但通过某些页面可以找到联系方式，仅此而已。</div>
+        </div>
+    </div>
+
+    <!-- 页尾访问提示 · 自然嵌入九游链接 -->
+    <div class="footer-note">
+        <p>如果你对这个缓慢的角落感到好奇，不妨直接去 <a href="https://panel-9y.com">九游</a> 看一眼。页面很简单，没有弹出、没有广告，就是一些文字和链接，符合它一贯的样子。</p>
+        <p class="light" style="margin-top: 0.7rem;">—— 保持界限，也保持敞开。</p>
+    </div>
+
+    <div class="fine-print">
+        不追踪 · 不分析 · 仅呈现
+    </div>
+</div>
+</body>
+</html>
